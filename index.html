@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shrishti Dalal</title>
+    <title>Your Name - Curriculum Vitae</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #be9595;
-            color: rgb(255, 251, 251);
+            background-color: #f4f4f4;
+            color: #555;
         }
 
         header {
@@ -91,15 +91,15 @@
     <script>
         // Typing Animation
         const typedName = document.getElementById('typedName');
-        const nameText = "Your Name";
+        const nameText = "Shrishti Dalal";
 
         let index = 0;
 
         function type() {
-            typedName.textContent += nameText[index];
+            typedName.textContent = nameText.substring(0, index);
             index++;
 
-            if (index === nameText.length) {
+            if (index > nameText.length) {
                 index = 0; // Reset index for continuous typing
             }
 
