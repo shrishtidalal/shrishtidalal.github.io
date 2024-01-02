@@ -69,7 +69,7 @@
 
 <body>
     <header>
-        <h1>Your Name</h1>
+        <h1 id="typedName"></h1>
         <p>Curriculum Vitae</p>
     </header>
 
@@ -87,6 +87,27 @@
     <footer>
         &copy; 2024 Your Name. All Rights Reserved.
     </footer>
+
+    <script>
+        // Typing Animation
+        const typedName = document.getElementById('typedName');
+        const nameText = "Your Name";
+
+        let index = 0;
+
+        function type() {
+            typedName.textContent += nameText[index];
+            index++;
+
+            if (index === nameText.length) {
+                index = 0; // Reset index for continuous typing
+            }
+
+            setTimeout(type, 150); // Adjust typing speed (milliseconds)
+        }
+
+        type();
+    </script>
 </body>
 
 </html>
