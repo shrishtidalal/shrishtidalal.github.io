@@ -5,453 +5,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shrishti Dalal - Personal Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-red: #FF0000;
-            --primary-blue: #0000FF;
-            --primary-yellow: #FFFF00;
-            --white: #FFFFFF;
-            --black: #000000;
-        }
-
-        * {
+        body {
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background-color: #eef2f3;
+            color: #333;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--white);
-            color: var(--black);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
         header {
-            background-color: var(--white);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            border-bottom: 4px solid var(--primary-blue);
+            background: linear-gradient(90deg, #355070, #6d597a);
+            color: #fff;
+            text-align: center;
+            padding: 3em 1em;
         }
 
-        .header-container {
+        nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: #b56576;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .logo {
-            font-weight: 600;
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--black);
+        nav a {
             text-decoration: none;
-            font-weight: 500;
-            padding: 5px 0;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-red);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -3px;
-            left: 0;
-            background-color: var(--primary-red);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hamburger menu for mobile */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-        }
-
-        .hamburger div {
-            width: 25px;
-            height: 3px;
-            background-color: var(--black);
-            margin: 5px 0;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
             transition: all 0.3s ease;
         }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 60px;
-            background-color: var(--white);
+        nav a:hover {
+            background: #e56b6f;
+            color: #fff;
         }
 
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: var(--primary-blue);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--primary-red);
-            color: var(--white);
+            padding: 10px 20px;
+            margin: 15px;
+            background: #e56b6f;
+            color: #fff;
+            border-radius: 5px;
             text-decoration: none;
-            font-weight: 500;
-            border-radius: 0;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background-color: var(--black);
+            background: #eaac8b;
         }
 
-        /* Sections */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            display: inline-block;
-            position: relative;
-            color: var(--primary-blue);
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 4px;
-            background: var(--primary-yellow);
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* About */
-        .about {
-            background-color: var(--white);
-        }
-
-        .about-container {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .about-image {
-            flex: 1;
+        .section {
+            padding: 40px 20px;
+            background: #fff;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         .profile-pic {
-            width: 300px;
-            height: 300px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--primary-yellow);
+            display: block;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .about-text {
-            flex: 1;
-        }
-
-        /* Projects */
-        .projects {
-            background-color: var(--white);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background: var(--white);
-            border: 3px solid var(--primary-red);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .project-content {
-            padding: 25px;
-        }
-
-        .project-content h3 {
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            color: var(--primary-blue);
-        }
-
-        /* Contact */
-        .contact {
-            background-color: var(--white);
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 15px;
-            border: 3px solid var(--primary-blue);
-            font-family: 'Inter', sans-serif;
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        /* Footer */
         footer {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            padding: 40px 0 20px;
             text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
-
-        .footer-links a {
-            color: var(--white);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-yellow);
-        }
-
-        /* Media Queries */
-        @media (max-width: 992px) {
-            .about-container {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                flex-direction: column;
-                background: var(--white);
-                padding: 20px;
-                gap: 15px;
-                transform: translateY(-150%);
-                transition: transform 0.3s ease;
-                opacity: 0;
-                visibility: hidden;
-                z-index: 99;
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+            padding: 20px;
+            background: #355070;
+            color: #fff;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
     <header>
-        <div class="container header-container">
-            <div class="logo">Shrishti Dalal</div>
-            <div class="hamburger" id="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <nav class="nav-links" id="nav-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
+        <h1>Shrishti Dalal</h1>
+        <p>Mathematics & Computer Science @ UC Berkeley </p>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Shrishti Dalal</h1>
-            <p>Mathematics & Computer Science @ UC Berkeley</p>
-            <a href="#projects" class="btn">View My Work</a>
-        </div>
-    </section>
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Me</h2>
-            </div>
-            <div class="about-container">
-                <div class="about-image">
-                    <img src="https://raw.githubusercontent.com/shrishtidalal/shrishtidalal.github.io/main/profile.jpeg" alt="Shrishti Dalal" class="profile-pic">
-                </div>
-                <div class="about-text">
-                    <p>[Your introduction goes here]</p>
-                    <p>[More about your background and interests]</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="container">
+        <h2>This is a work in progress, but welcome!</h2>
+        <p>Exploring the intersections of mathematics, computer science, and whatever else life throws my way. Also, quick disclaimer, in this process I have discovered that front-end development is not my forte.</p>
+        <a href="#projects" class="btn">View My Work</a>
+    </div>
 
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2>Projects</h2>
-            </div>
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Project Title</h3>
-                        <p>[Project description]</p>
-                    </div>
-                </div>
-                
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Project Title</h3>
-                        <p>[Project description]</p>
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Project Title</h3>
-                        <p>[Project description]</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="section" id="about">
+        <h2>About Me</h2>
+        <img src="https://raw.githubusercontent.com/shrishtidalal/shrishtidalal.github.io/main/profile.jpeg" alt="Picture" class="profile-pic">
+        <p>Hi! I'm Shrishti, a Math + CS student at UC Berkeley. My interests mainly include applying mathematical concepts to real-world applications.</p>
+    </div>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact</h2>
-            </div>
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Your Email">
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" placeholder="Your Message"></textarea>
-                    </div>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+    <div class="section" id="projects">
+        <h2>Projects</h2>
+        <p>An amalgamation of seemingly unrelated ventures that represent my work thus far.</p>
+        <a href="projects.html" class="btn">See Projects</a>
+    </div>
 
-    <!-- Footer -->
+    <div class="section" id="blog">
+        <h2>Blog</h2>
+        <p>The universe might exist in ten dimensions - but my ramblings are obviously more important.</p>
+        <a href="blog.html" class="btn">Read Blog</a>
+    </div>
+
+    <div class="section" id="contact">
+        <h2>Contact</h2>
+        <p>Feel free to reach out to me via email or LinkedIn for collaborations or questions or anything in between.</p>
+        <a href="mailto:shrishti.dalal@berkeley.edu" class="btn">Email Me</a>
+    </div>
+
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="mailto:shrishti.dalal@berkeley.edu">Email</a>
-                <a href="https://linkedin.com/in/shrishti-dalal" target="_blank">LinkedIn</a>
-                <a href="https://github.com/shrishtidalal" target="_blank">GitHub</a>
-            </div>
-            <p>&copy; 2025 Shrishti Dalal. All Rights Reserved.</p>
-        </div>
+        <p>&copy; 2025 Shrishti Dalal. All Rights Reserved.</p>
     </footer>
-
-    <script>
-        // Mobile Navigation
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking on a nav link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-    </script>
 </body>
 
 </html>
