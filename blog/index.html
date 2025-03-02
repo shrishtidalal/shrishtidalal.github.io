@@ -1,1 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Shrishti Dalal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Additional styles specific to the blog index page */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .blog-card {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .blog-card:hover .blog-card-image img {
+            transform: scale(1.05);
+        }
+        
+        .blog-card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        .blog-card:hover .blog-card-title {
+            color: var(--accent-color);
+        }
+        
+        .blog-card-meta {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .blog-card-meta span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .blog-card-meta i {
+            margin-right: 5px;
+        }
+        
+        .blog-card-excerpt {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .blog-card-footer {
+            margin-top: auto;
+        }
+        
+        .blog-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            padding: 6px 15px;
+            background-color: var(--section-bg);
+            border: none;
+            border-radius: 20px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--accent-color);
+            color: var(--light-text);
+        }
+        
+        .blog-search {
+            margin-bottom: 30px;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="../index.html" class="logo">SD</a>
+            <nav>
+                <ul id="menu">
+                    <li><a href="../index.html#about" title="Learn about me">About</a></li>
+                    <li><a href="../index.html#research" title="See my research work">Research</a></li>
+                    <li><a href="../index.html#experience" title="View my professional experience">Experience</a></li>
+                    <li><a href="../index.html#education" title="Check my academic background">Education</a></li>
+                    <li><a href="../index.html#skills" title="Discover my technical skills">Skills</a></li>
+                    <li><a href="../index.html#projects" title="Browse my projects">Projects</a></li>
+                    <li><a href="../index.html#blog" title="Read my thoughts">Blog</a></li>
+                    <li><a href="../index.html#contact" title="Get in touch">Contact</a></li>
+                </ul>
+                <button class="mobile-nav-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+            <button class="theme-switch" id="themeSwitch" aria-label="Switch between light and dark mode" title="Toggle dark/light mode">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="container main-container">
+        <main class="content">
+            <section class="blog-header">
+                <h1 class="section-title">Blog</h1>
+                <p>Exploring the intersections of mathematics, computer science, and the occasional existential crisis.</p>
+                
+                <div class="blog-search">
+                    <form class="search-form">
+                        <input type="text" class="search-input" placeholder="Search posts...">
+                        <button type="submit" class="btn"><i class="fas fa-search"></i> Search</button>
+                    </form>
+                </div>
+                
+                <div class="blog-filters">
+                    <button class="filter-btn active" data-filter="all">All Posts</button>
+                    <button class="filter-btn" data-filter="mathematics">Mathematics</button>
+                    <button class="filter-btn" data-filter="programming">Programming</button>
+                    <button class="filter-btn" data-filter="education">Education</button>
+                    <button class="filter-btn" data-filter="personal">Personal</button>
+                </div>
+            </section>
+            
+            <div class="blog-grid">
+                <!-- Blog Post Card 1 -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="../assets/images/graph-theory-blog.jpg" alt="Graph Theory Visualization" 
+                             onerror="this.src='https://via.placeholder.com/800x400?text=Graph+Theory'">
+                    </div>
+                    <div class="blog-card-content">
+                        <h2 class="blog-card-title">The Beauty of Graph Theory in Unexpected Places</h2>
+                        <div class="blog-card-meta">
+                            <span><i class="fas fa-calendar-alt"></i> February 15, 2025</span>
+                            <span><i class="fas fa-tag"></i> Mathematics, Networks</span>
+                        </div>
+                        <div class="blog-card-excerpt">
+                            <p>From social networks to neural connections, graph theory has a way of showing up in the most unexpected places. Here's how I found graph theory principles in dance choreography...</p>
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="graph-theory.html" class="btn"><i class="fas fa-arrow-right"></i> Read More</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Blog Post Card 2 -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="../assets/images/assembly-blog.jpg" alt="Assembly Code" 
+                             onerror="this.src='https://via.placeholder.com/800x400?text=Assembly+Code'">
+                    </div>
+                    <div class="blog-card-content">
+                        <h2 class="blog-card-title">Why Learning Assembly Made Me a Better Programmer</h2>
+                        <div class="blog-card-meta">
+                            <span><i class="fas fa-calendar-alt"></i> December 10, 2024</span>
+                            <span><i class="fas fa-tag"></i> Programming, CS Education</span>
+                        </div>
+                        <div class="blog-card-excerpt">
+                            <p>Everyone hates learning assembly. It's tedious, it's cryptic, and it feels like you've been transported back to the 1970s. But here's why that painful journey actually improved my high-level programming skills...</p>
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="assembly.html" class="btn"><i class="fas fa-arrow-right"></i> Read More</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Blog Post Card 3 -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="../assets/images/interdisciplinary-blog.jpg" alt="Interdisciplinary Thinking" 
+                             onerror="this.src='https://via.placeholder.com/800x400?text=Interdisciplinary+Thinking'">
+                    </div>
+                    <div class="blog-card-content">
+                        <h2 class="blog-card-title">Interdisciplinary Thinking: Math + CS + Economics</h2>
+                        <div class="blog-card-meta">
+                            <span><i class="fas fa-calendar-alt"></i> October 5, 2024</span>
+                            <span><i class="fas fa-tag"></i> Interdisciplinary, Education</span>
+                        </div>
+                        <div class="blog-card-excerpt">
+                            <p>Why restrict yourself to one field when you can combine several? Here's how my unusual combination of studies has given me a unique perspective on problem-solving...</p>
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="interdisciplinary.html" class="btn"><i class="fas fa-arrow-right"></i> Read More</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Blog Post Card 4 -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="../assets/images/algorithm-blog.jpg" alt="Algorithm Design" 
+                             onerror="this.src='https://via.placeholder.com/800x400?text=Algorithm+Design'">
+                    </div>
+                    <div class="blog-card-content">
+                        <h2 class="blog-card-title">The Art of Algorithm Design</h2>
+                        <div class="blog-card-meta">
+                            <span><i class="fas fa-calendar-alt"></i> September 12, 2024</span>
+                            <span><i class="fas fa-tag"></i> Computer Science, Algorithms</span>
+                        </div>
+                        <div class="blog-card-excerpt">
+                            <p>Designing efficient algorithms is as much an art as it is a science. Here's my approach to tackling complex computational problems with elegance and efficiency...</p>
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="#" class="btn"><i class="fas fa-arrow-right"></i> Read More</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- More blog posts would be added here -->
+            </div>
+            
+            <div class="pagination" style="margin-top: 40px; text-align: center;">
+                <a href="#" class="btn btn-sm active">1</a>
+                <a href="#" class="btn btn-sm">2</a>
+                <a href="#" class="btn btn-sm">3</a>
+                <span>...</span>
+                <a href="#" class="btn btn-sm">Next <i class="fas fa-chevron-right"></i></a>
+            </div>
+        </main>
+        
+        <aside class="sidebar blog-sidebar">
+            <div class="sidebar-widget">
+                <h3>About the Author</h3>
+                <div class="author-bio">
+                    <img src="https://raw.githubusercontent.com/shrishtidalal/shrishtidalal.github.io/main/profile.jpeg" alt="Shrishti Dalal" class="author-pic">
+                    <p>Shrishti Dalal is a Computer Science and Applied Mathematics student at UC Berkeley with a focus on graph theory and computational models.</p>
+                </div>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>Categories</h3>
+                <ul class="categories">
+                    <li><a href="#">Mathematics <span>(5)</span></a></li>
+                    <li><a href="#">Computer Science <span>(8)</span></a></li>
+                    <li><a href="#">Economics <span>(3)</span></a></li>
+                    <li><a href="#">Personal <span>(4)</span></a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>Recent Posts</h3>
+                <ul class="recent-posts">
+                    <li><a href="graph-theory.html">The Beauty of Graph Theory in Unexpected Places</a></li>
+                    <li><a href="assembly.html">Why Learning Assembly Made Me a Better Programmer</a></li>
+                    <li><a href="interdisciplinary.html">Interdisciplinary Thinking: Math + CS + Economics</a></li>
+                    <li><a href="#">The Art of Algorithm Design</a></li>
+                    <li><a href="#">Finding Balance: Academia and Dance</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>Archive</h3>
+                <ul class="categories">
+                    <li><a href="#">March 2025 <span>(2)</span></a></li>
+                    <li><a href="#">February 2025 <span>(3)</span></a></li>
+                    <li><a href="#">January 2025 <span>(1)</span></a></li>
+                    <li><a href="#">December 2024 <span>(4)</span></a></li>
+                    <li><a href="#">November 2024 <span>(2)</span></a></li>
+                    <li><a href="#">October 2024 <span>(3)</span></a></li>
+                    <li><a href="#">September 2024 <span>(5)</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-nav">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#research">Research</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#education">Education</a>
+                <a href="../index.html#skills">Skills</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#blog">Blog</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <p class="footer-text">© 2025 Shrishti Dalal. All rights reserved. | Created with a reluctant understanding of HTML/CSS and a slightly less reluctant understanding of prompt engineering</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Blog filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active state
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Here you would typically filter the blog posts
+                    // This would be implemented with actual filtering logic in a real site
+                    const filter = this.getAttribute('data-filter');
+                    console.log('Filter selected:', filter);
+                    
+                    // Example placeholder for actual filter implementation
+                    if (filter === 'all') {
+                        // Show all posts
+                    } else {
+                        // Show only posts matching the filter
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
