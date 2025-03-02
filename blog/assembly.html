@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Learning Assembly Made Me a Better Programmer - Shrishti Dalal</title>
+    <meta name="description" content="Exploring how learning low-level assembly language improved my high-level programming skills and deepened my understanding of computer architecture.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Page-specific styles */
+        .blog-post-container {
+            max-width: 1200px;
+            margin-top: 100px;
+        }
+        
+        .blog-post-content {
+            flex: 1;
+            padding: 0 20px 50px;
+        }
+        
+        .blog-sidebar {
+            width: 300px;
+            padding-top: 0;
+        }
+        
+        @media (max-width: 992px) {
+            .blog-sidebar {
+                width: 100%;
+                margin-top: 50px;
+            }
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .back-link:hover {
+            color: var(--accent-hover);
+        }
+        
+        .blog-post {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .blog-post-header {
+            padding: 30px 30px 20px;
+        }
+        
+        .blog-post-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .blog-post-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .blog-post-meta span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .blog-post-meta i {
+            margin-right: 5px;
+        }
+        
+        .blog-post-body {
+            padding: 0 30px 30px;
+        }
+        
+        .blog-post-body h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+        }
+        
+        .blog-post-body p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .blog-post-body ul, .blog-post-body ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .blog-post-body li {
+            margin-bottom: 10px;
+        }
+        
+        .blog-post-body pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow: auto;
+            margin-bottom: 20px;
+        }
+        
+        .blog-post-body code {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .blog-post-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .blog-post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .blog-post-share {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .blog-post-share span {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+        
+        .blog-post-share a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--light-text);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .blog-post-share a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .blog-post-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        
+        .prev-post, .next-post {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .prev-post:hover, .next-post:hover {
+            transform: translateY(-5px);
+        }
+        
+        .prev-post {
+            text-align: left;
+        }
+        
+        .next-post {
+            text-align: right;
+            align-items: flex-end;
+        }
+        
+        .prev-post span, .next-post span {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+        
+        .prev-post p, .next-post p {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .prev-post i, .next-post i {
+            margin: 0 5px;
+        }
+        
+        /* Sidebar widgets */
+        .sidebar-widget {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar-widget h3 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .author-bio {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .author-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--accent-color);
+            padding: 3px;
+        }
+        
+        .author-bio p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .recent-posts, .categories {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .recent-posts li, .categories li {
+            border-bottom: 1px dashed var(--border-color);
+            padding: 10px 0;
+        }
+        
+        .recent-posts li:last-child, .categories li:last-child {
+            border-bottom: none;
+        }
+        
+        .recent-posts a, .categories a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: var(--transition);
+            display: block;
+            font-size: 0.95rem;
+        }
+        
+        .recent-posts a:hover, .categories a:hover {
+            color: var(--accent-color);
+        }
+        
+        .categories a {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .categories span {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+        }
+        
+        .code-example {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 6px;
+            margin: 20px 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .code-header {
+            background-color: #1a1a1a;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #3a3a3a;
+        }
+        
+        .code-title {
+            font-size: 0.85rem;
+            color: #ddd;
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .code-language {
+            font-size: 0.75rem;
+            color: #888;
+            font-family: 'Roboto Mono', monospace;
+            padding: 2px 8px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+        
+        .code-content {
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .comment {
+            color: #6a9955;
+        }
+        
+        .directive {
+            color: #c586c0;
+        }
+        
+        .register {
+            color: #9cdcfe;
+        }
+        
+        .instruction {
+            color: #569cd6;
+        }
+        
+        .value {
+            color: #ce9178;
+        }
+        
+        .label {
+            color: #dcdcaa;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="../index.html" class="logo">SD</a>
+            <nav>
+                <ul id="menu">
+                    <li><a href="../index.html#about" title="Learn about me">About</a></li>
+                    <li><a href="../index.html#research" title="See my research work">Research</a></li>
+                    <li><a href="../index.html#experience" title="View my professional experience">Experience</a></li>
+                    <li><a href="../index.html#education" title="Check my academic background">Education</a></li>
+                    <li><a href="../index.html#skills" title="Discover my technical skills">Skills</a></li>
+                    <li><a href="../index.html#projects" title="Browse my projects">Projects</a></li>
+                    <li><a href="../index.html#blog" title="Read my thoughts">Blog</a></li>
+                    <li><a href="../index.html#contact" title="Get in touch">Contact</a></li>
+                </ul>
+                <button class="mobile-nav-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+            <button class="theme-switch" id="themeSwitch" aria-label="Switch between light and dark mode" title="Toggle dark/light mode">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="container main-container blog-post-container">
+        <main class="content blog-post-content">
+            <article class="blog-post">
+                <header class="blog-post-header">
+                    <a href="../index.html#blog" class="back-link"><i class="fas fa-arrow-left"></i> Back to all posts</a>
+                    <h1 class="blog-post-title">Why Learning Assembly Made Me a Better Programmer</h1>
+                    <div class="blog-post-meta">
+                        <span><i class="fas fa-calendar-alt"></i> December 10, 2024</span>
+                        <span><i class="fas fa-tag"></i> Programming, CS Education</span>
+                    </div>
+                </header>
+                
+                <div class="blog-post-body">
+                    <p>Everyone hates learning assembly. It's tedious, it's cryptic, and it feels like you've been transported back to the 1970s. When I first saw assembly code in CS 61C at Berkeley, my immediate reaction was despair – why would anyone choose to write code like this in the 21st century?</p>
+                    
+                    <p>Yet now, looking back after completing the course, I can confidently say that learning assembly was one of the most valuable experiences in my programming journey. Here's why delving into this seemingly arcane language actually transformed my approach to modern programming.</p>
+                    
+                    <h2>Understanding What's Really Happening</h2>
+                    
+                    <p>Before assembly, I treated computers like magic boxes. I'd write Python or Java code and it would just... work. Sometimes it would be slow, sometimes it would crash with mysterious errors, but I rarely understood <em>why</em>.</p>
+                    
+                    <p>Learning RISC-V assembly forced me to understand what happens at the hardware level:</p>
+                    
+                    <ul>
+                        <li>How data is physically stored in registers and memory</li>
+                        <li>How the processor executes instructions one by one</li>
+                        <li>How function calls actually work behind the scenes</li>
+                        <li>What pointers really are (memory addresses, not mysterious arrows)</li>
+                    </ul>
+                    
+                    <p>This fundamental understanding means I no longer see high-level languages as magic. I can visualize what's happening underneath my Python code, which helps me write better, more efficient programs.</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-title">swap.s</span>
+                            <span class="code-language">RISC-V Assembly</span>
+                        </div>
+                        <div class="code-content">
+<span class="comment"># Simple RISC-V function to swap two integers</span>
+<span class="directive">.globl</span> swap
+
+swap:
+    <span class="comment"># a0 = pointer to first int, a1 = pointer to second int</span>
+    <span class="instruction">lw</span>   <span class="register">t0</span>, <span class="value">0</span>(<span class="register">a0</span>)   <span class="comment"># t0 = *a0 (load first value)</span>
+    <span class="instruction">lw</span>   <span class="register">t1</span>, <span class="value">0</span>(<span class="register">a1</span>)   <span class="comment"># t1 = *a1 (load second value)</span>
+    <span class="instruction">sw</span>   <span class="register">t1</span>, <span class="value">0</span>(<span class="register">a0</span>)   <span class="comment"># *a0 = t1 (store second value in first location)</span>
+    <span class="instruction">sw</span>   <span class="register">t0</span>, <span class="value">0</span>(<span class="register">a1</span>)   <span class="comment"># *a1 = t0 (store first value in second location)</span>
+    <span class="instruction">ret</span>               <span class="comment"># Return to caller</span>
+                        </div>
+                    </div>
+                    
+                    <p>Looking at this simple swap function in RISC-V assembly, we can clearly see how the function works with memory addresses and register values. This explicit manipulation of memory made concepts like reference passing in high-level languages much clearer to me.</p>
+                    
+                    <h2>Appreciating Abstractions</h2>
+                    
+                    <p>It's hard to appreciate a good abstraction unless you've experienced life without it. After writing assembly code where I needed to:</p>
+                    
+                    <ul>
+                        <li>Manually allocate and track registers</li>
+                        <li>Implement my own loops using branch instructions</li>
+                        <li>Manage the stack frame for function calls</li>
+                        <li>Keep track of every byte of memory used</li>
+                    </ul>
+                    
+                    <p>I gained a profound appreciation for what high-level languages do for us. This appreciation isn't just theoretical – it helps me better understand the costs and benefits of different abstractions in my daily coding.</p>
+                    
+                    <p>For example, I now understand why certain operations in Python might be slow (lots of dynamic type checking happening underneath) while equivalent C code runs faster (direct memory operations with minimal overhead).</p>
+                    
+                    <h2>Debugging Like a Detective</h2>
+                    
+                    <p>Assembly language forces you to be methodical. When you have a bug, you can't rely on helpful error messages or debugger-friendly variable names. You have to trace the execution flow instruction by instruction, checking register values, memory contents, and branch conditions.</p>
+                    
+                    <p>This disciplined approach has improved my debugging skills across all languages. Now, when I encounter a bug in JavaScript or Java:</p>
+                    
+                    <ol>
+                        <li>I'm more patient and methodical</li>
+                        <li>I check my assumptions about what's happening in memory</li>
+                        <li>I trace through the code step by step, like a processor would</li>
+                        <li>I'm better at identifying patterns that might indicate memory leaks or performance issues</li>
+                    </ol>
+                    
+                    <p>Learning to debug in assembly is like learning to solve crimes with just a magnifying glass. When you get modern debugging tools back, you feel like you have superpowers.</p>
+                    
+                    <h2>Performance Intuition</h2>
+                    
+                    <p>Perhaps the most practical benefit is developing an intuition for what makes code fast or slow. In modern programming, we're often taught to focus on algorithmic complexity (Big O notation), which is crucial. But assembly taught me about other important factors:</p>
+                    
+                    <ul>
+                        <li><strong>Memory access patterns:</strong> How data locality affects cache performance</li>
+                        <li><strong>Branch prediction:</strong> How conditionals can slow down execution</li>
+                        <li><strong>Instruction pipelining:</strong> How modern CPUs execute multiple instructions in parallel</li>
+                        <li><strong>Memory hierarchy:</strong> The massive speed differences between registers, various levels of cache, RAM, and disk</li>
+                    </ul>
+                    
+                    <p>With this knowledge, I can make more informed decisions about data structures and algorithms. For instance, I might choose an array over a linked list for a small dataset, not just because of algorithmic complexity, but because I understand how the contiguous memory layout of arrays plays nicely with CPU caches.</p>
+                    
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-title">Performance example</span>
+                            <span class="code-language">Python</span>
+                        </div>
+                        <div class="code-content">
+# Loop 1: Cache-friendly access pattern
+for i in range(1000):
+    for j in range(1000):
+        matrix[i][j] = i + j  # Accessing memory sequentially
+        
+# Loop 2: Cache-unfriendly access pattern
+for i in range(1000):
+    for j in range(1000):
+        matrix[j][i] = i + j  # Jumping through memory
+                        </div>
+                    </div>
+                    
+                    <p>This simple example illustrates how understanding memory layout impacts performance. The first loop accesses memory sequentially (good for cache), while the second jumps through memory in a way that causes frequent cache misses. This insight came directly from understanding how assembly code interacts with memory.</p>
+                    
+                    <h2>The Unexpected Joy of Assembly</h2>
+                    
+                    <p>Beyond practical benefits, there's something oddly satisfying about assembly programming. It's like solving a puzzle with a very limited set of tools. You feel a special kind of pride when your assembly code works correctly because you've truly understood and controlled every aspect of what the computer is doing.</p>
+                    
+                    <p>You also develop a deeper respect for the early programmers who built complex systems with these primitive tools. The fact that we have modern operating systems, compilers, and applications is a testament to their ingenuity.</p>
+                    
+                    <h2>Should Everyone Learn Assembly?</h2>
+                    
+                    <p>I'm not suggesting everyone needs to become an assembly expert. But I do believe every serious programmer should at least understand the basics of how computers execute code at the hardware level.</p>
+                    
+                    <p>Even if you never write a line of assembly in your professional career, the mental model it gives you will make you a more effective programmer in any language. You'll have a better understanding of:</p>
+                    
+                    <ul>
+                        <li>Why certain bugs occur (especially in languages like C where you interact closely with memory)</li>
+                        <li>How to optimize performance-critical code</li>
+                        <li>What's happening when you use pointers or references</li>
+                        <li>How the compiler translates your high-level code into machine instructions</li>
+                    </ul>
+                    
+                    <p>So if you're currently struggling through an assembly course, take heart! What seems like arcane torture now will eventually transform your understanding of computers in ways that make you a significantly better programmer. And if you've never learned assembly, consider diving into it – just a little bit might go a long way in improving your programming intuition.</p>
+                    
+                    <p>As for me, while I'm not rushing to write my next project in assembly, I'm genuinely grateful for the deeper understanding it gave me. Sometimes the most valuable knowledge comes from the courses we initially dread the most.</p>
+                </div>
+                
+                <footer class="blog-post-footer">
+                    <div class="blog-post-tags">
+                        <span class="tag">Assembly</span>
+                        <span class="tag">Computer Architecture</span>
+                        <span class="tag">CS Education</span>
+                        <span class="tag">Programming</span>
+                        <span class="tag">RISC-V</span>
+                    </div>
+                    
+                    <div class="blog-post-share">
+                        <span>Share:</span>
+                        <a href="#" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Share by Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </footer>
+            </article>
+            
+            <div class="blog-post-navigation">
+                <a href="graph-theory.html" class="prev-post">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Previous Post</span>
+                    <p>The Beauty of Graph Theory in Unexpected Places</p>
+                </a>
+                <a href="interdisciplinary.html" class="next-post">
+                    <span>Next Post</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <p>Interdisciplinary Thinking: Math + CS + Economics</p>
+                </a>
+            </div>
+        </main>
+        
+        <aside class="sidebar blog-sidebar">
+            <div class="sidebar-widget">
+                <h3>About the Author</h3>
+                <div class="author-bio">
+                    <img src="https://raw.githubusercontent.com/shrishtidalal/shrishtidalal.github.io/main/profile.jpeg" alt="Shrishti Dalal" class="author-pic">
+                    <p>Shrishti Dalal is a Computer Science and Applied Mathematics student at UC Berkeley with a focus on computational models and mathematical algorithms.</p>
+                </div>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>Recent Posts</h3>
+                <ul class="recent-posts">
+                    <li><a href="graph-theory.html">The Beauty of Graph Theory in Unexpected Places</a></li>
+                    <li><a href="assembly.html">Why Learning Assembly Made Me a Better Programmer</a></li>
+                    <li><a href="interdisciplinary.html">Interdisciplinary Thinking: Math + CS + Economics</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>Categories</h3>
+                <ul class="categories">
+                    <li><a href="#">Mathematics <span>(5)</span></a></li>
+                    <li><a href="#">Computer Science <span>(8)</span></a></li>
+                    <li><a href="#">Economics <span>(3)</span></a></li>
+                    <li><a href="#">Personal <span>(4)</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-nav">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#research">Research</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#education">Education</a>
+                <a href="../index.html#skills">Skills</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#blog">Blog</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <p class="footer-text">© 2025 Shrishti Dalal. All rights reserved. | Created with a reluctant understanding of HTML/CSS and a slightly less reluctant understanding of prompt engineering</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
