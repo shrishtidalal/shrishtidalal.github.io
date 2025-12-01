@@ -238,6 +238,31 @@ nav a:hover:after {
     background-color: var(--accent-color);
 }
 
+.disclaimer {
+    background-color: rgba(229, 107, 111, 0.1);
+    border-left: 4px solid var(--accent-hover);
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.disclaimer p {
+    margin: 0;
+    color: var(--text-color);
+}
+
+.disclaimer a {
+    color: var(--accent-hover);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.disclaimer a:hover {
+    text-decoration: underline;
+}
+
 .about-text {
     margin-bottom: 20px;
     font-size: 1rem;
